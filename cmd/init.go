@@ -16,21 +16,22 @@ limitations under the License.
 package cmd
 
 import (
-	"fmt"
-
 	"github.com/spf13/cobra"
+	"github.com/tomsdevsn/berichtsheft-cli/pkg/database"
 )
+
+var force bool
 
 // initCmd represents the init command
 var initCmd = &cobra.Command{
 	Use:   "init",
 	Short: "Initialize the database for the Berichtsheft",
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("init called")
+		database.InitDatabase("", force)
 	},
 }
 
 func init() {
-	rootCmd.AddCommand(initCmd)
-	initCmd.Flags.BoolP("force", "f", false, "Force the initialization of the database (will overwrite if it already exists)")
+	RootCmd.AddCommand(initCmd)
+	initCmd.Flags().BoolVarP(&force, "force", "f", false, "Force the initialization of the database (will overwrite if it already exists)")
 }
