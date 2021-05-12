@@ -14,21 +14,21 @@ var (
 	cfgFile string
 	logger  log.Logger
 
-	rootCmd = &cobra.Command{
+	RootCmd = &cobra.Command{
 		Use:   "berichtsheft-cli",
 		Short: "A Berichtsheft is a booklet you need to do in Germany due to the regulations of IHK",
 	}
 )
 
 func Execute() error {
-	return rootCmd.Execute()
+	return RootCmd.Execute()
 }
 
 func init() {
 	logger = log.NewLogfmtLogger(os.Stdout)
 	cobra.OnInitialize(initConfig)
 
-	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.berichtsheft/config.yaml)")
+	RootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.berichtsheft/config.yaml)")
 	viper.SetDefault("author", "Tom Siewert <tom@siewert.io>")
 	viper.SetDefault("license", "apache")
 }
@@ -40,8 +40,8 @@ func initConfig() {
 		home, err := homedir.Dir()
 		cobra.CheckErr(err)
 
-		viper.AddConfigPath(home)
-		viper.SetConfigName(".berichtsheft")
+		viper.AddConfigPath(home + "/.berichtsheft")
+		viper.SetConfigName("config")
 	}
 
 	viper.AutomaticEnv()
