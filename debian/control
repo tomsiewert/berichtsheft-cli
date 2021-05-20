@@ -1,0 +1,13 @@
+Source: berichtsheft-cli
+Maintainer: Tom Siewert <tom@siewert.io>
+Section: misc
+Priority: optional
+Build-Depends: debhelper (>= 12),
+               golang-1.16,
+               libsqlite3-dev (>= 3.27)
+
+Package: berichtsheft-cli
+Architecture: amd64
+Depends: texlist-base,
+         texlive-fonts-recommended
+Description: berichtsheft-cli is a tool which should help to keep your "Berichtsheft" up-to-date.
