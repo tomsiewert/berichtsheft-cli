@@ -17,7 +17,7 @@ package task
 
 import (
 	"github.com/spf13/cobra"
-	"github.com/tomsdevsn/berichtsheft-cli/cmd"
+	cmd "github.com/tomsdevsn/berichtsheft-cli/cmd/berichtsheft"
 )
 
 // taskCmd represents the task command
