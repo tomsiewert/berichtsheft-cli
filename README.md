@@ -1,6 +1,6 @@
 # The "Berichtsheft" CLI
 
-In Germany, an apprentice needs to write a "Berichtsheft" every week to ensure they also do the "correct" work (e.g. making coffee as main task in a apprenticeship for an IT specialist is not correct).
+In Germany, an apprentice needs to write a "Berichtsheft" every week to ensure they also do the "correct" work (e.g. making coffee as main task in an apprenticeship for an IT specialist is not correct).
 
 In general, it is a summary of the tasks the apprentice has done in a week.
 
