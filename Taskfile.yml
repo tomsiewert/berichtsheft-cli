@@ -1,0 +1,57 @@
+version: '3'
+output: 'prefixed'
+
+env:
+  CGO_ENABLED: 0
+
+vars:
+  PATH: 'github.com/tomsdevsn/berichtsheft-cli'
+  BINARY_NAME: 'berichtsheft-cli'
+  DATE:
+    sh: 'date +%Y-%m-%dT%H:%M:%S%z'
+  VERSION:
+    sh: git describe --tags || git describe --always
+
+tasks:
+  bin:
+    desc: Build the binary file
+    cmds:
+      - go build -a -ldflags "-X {{.PATH}}/cmd/berichtsheft.BuildDate={{.DATE}} -X {{.PATH}}/cmd/berichtsheft.BuildVersion={{.VERSION}} -extldflags '-static' -s -w" -o build/{{.BINARY_NAME}}
+  bin-cov:
+    cmds:
+      - mkdir -p build
+      - go test -covermode=atomic -coverpkg="./..." -c -tags main -o build/{{.BINARY_NAME}}.test
+  test:
+    cmds:
+      - mkdir -p coverage
+      - go test -run "^Test[^_]" -v ./... -coverprofile=coverage/unittest_coverage.out -covermode=atomic
+  changelog:
+    desc: Adds a changelog entry
+    cmds:
+      - ish: changelogger
+  release:
+    desc: Create a new release
+    cmds:
+      - ish: changelogger release new
+        ignore_error: yes
+      - git add CHANGELOG.md
+      - git commit -m "Bump version to $(changelogger release last --version-only)" -m "$(changelogger release last)"
+      - git tag -a "$(changelogger release last --version-only)" -m "Version: $(changelogger release last)"
+      - git push
+      - git push --tags
+    env:
+      CHANGELOGGER_VERSION_FORMAT: semver
+  coverage:
+    desc: Generate coverage report
+    cmds:
+      - |
+        echo "mode: atomic" > coverage/total
+        grep "^github.com" -h coverage/*.out | sort >> coverage/total
+        go tool cover -html=coverage/total -o coverage/coverage.html
+  ci:
+    desc: Run ci tasks
+    cmds:
+      - task: lint
+      - task: bin-cov
+      - task: test
+      - task: coverage
