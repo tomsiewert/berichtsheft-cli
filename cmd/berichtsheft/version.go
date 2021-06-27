@@ -16,20 +16,22 @@ limitations under the License.
 package cmd
 
 import (
-	"github.com/go-kit/kit/log/level"
+	"fmt"
+
 	"github.com/spf13/cobra"
 )
 
-var generateCmd = &cobra.Command{
-	Use:   "generate",
-	Short: "Generate the Berichtsheft with the known entries in the SQLite database",
+// versionCmd represents the version command
+var versionCmd = &cobra.Command{
+	Use:   "version",
+	Short: "Show the build information",
 	RunE: func(cmd *cobra.Command, args []string) error {
-		var err error
-		level.Debug(logger).Log("log", "generate called")
-		return err
+		fmt.Println("Build Version: " + BuildVersion)
+		fmt.Println("Build Date: " + BuildDate)
+		return nil
 	},
 }
 
 func init() {
-	RootCmd.AddCommand(generateCmd)
+	RootCmd.AddCommand(versionCmd)
 }

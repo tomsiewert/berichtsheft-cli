@@ -82,7 +82,7 @@ PowerShell:
 		case "powershell":
 			err = cmd.Root().GenPowerShellCompletionWithDesc(os.Stdout)
 		default:
-			err = fmt.Errorf("Unsupported shell: %s", args)
+			err = fmt.Errorf("unsupported shell: %s", args)
 		}
 		return err
 	},

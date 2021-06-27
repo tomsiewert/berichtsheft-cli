@@ -187,3 +187,4 @@ $RECYCLE.BIN/
 ### OWN ###
 rpmbuild
 berichtsheft-cli
+build
