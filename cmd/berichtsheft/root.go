@@ -1,9 +1,8 @@
 package cmd
 
 import (
-	"os"
+	"fmt"
 
-	"github.com/go-kit/kit/log"
 	homedir "github.com/mitchellh/go-homedir"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
@@ -11,7 +10,6 @@ import (
 
 var (
 	cfgFile      string
-	logger       log.Logger
 	BuildDate    string
 	BuildVersion string
 
@@ -24,13 +22,13 @@ var (
 	}
 )
 
-func Execute() error {
-	return RootCmd.Execute()
+func Execute() {
+	if err := RootCmd.Execute(); err != nil {
+		fmt.Println(err)
+	}
 }
 
 func init() {
-	logger = log.NewLogfmtLogger(os.Stdout)
-
 	RootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.berichtsheft/config.yaml)")
 }
 

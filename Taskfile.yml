@@ -21,6 +21,15 @@ tasks:
     cmds:
       - mkdir -p build
       - go test -covermode=atomic -coverpkg="./..." -c -tags main -o build/{{.BINARY_NAME}}.test
+  format:
+    desc: Run gofmt for the project
+    cmds:
+      - bash -c "diff -u <(echo -n) <(go fmt ./...)"
+  lint:
+    desc: Run golangci-lint for the project
+    deps: [format]
+    cmds:
+      - golangci-lint run
   test:
     cmds:
       - mkdir -p coverage

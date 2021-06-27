@@ -188,3 +188,4 @@ $RECYCLE.BIN/
 rpmbuild
 berichtsheft-cli
 build
+coverage
