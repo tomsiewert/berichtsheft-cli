@@ -4,11 +4,13 @@ jobs:
   build-cli:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-    - name: Set up Golang
-      uses: actions/setup-go@v2
-    - name: Install Task
-      uses: arduino/setup-task@v1
-    - name: Run CI Task
-      run: task ci
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Set up Golang
+        uses: actions/setup-go@v2
+      - name: Install Task
+        uses: arduino/setup-task@v1
+      - name: golangci-lint
+        uses: golangci/golangci-lint-action@v2
+      - name: Run CI Task
+        run: task ci
