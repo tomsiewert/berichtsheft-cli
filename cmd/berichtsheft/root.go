@@ -14,7 +14,7 @@ var (
 	BuildVersion string
 
 	RootCmd = &cobra.Command{
-		Use:   "berichtsheft-cli",
+		Use:   "berichtsheft",
 		Short: "A Berichtsheft is a booklet you need to do in Germany due to the regulations of IHK",
 		PersistentPreRunE: func(cmd *cobra.Command, args []string) error {
 			return initConfig(cmd)

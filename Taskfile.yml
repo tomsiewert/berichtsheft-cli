@@ -6,7 +6,7 @@ env:
 
 vars:
   PATH: 'github.com/tomsdevsn/berichtsheft-cli'
-  BINARY_NAME: 'berichtsheft-cli'
+  BINARY_NAME: 'berichtsheft'
   DATE:
     sh: 'date +%Y-%m-%dT%H:%M:%S%z'
   VERSION:
