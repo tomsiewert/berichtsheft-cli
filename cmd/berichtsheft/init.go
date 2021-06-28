@@ -16,22 +16,28 @@ limitations under the License.
 package cmd
 
 import (
+	homedir "github.com/mitchellh/go-homedir"
 	"github.com/spf13/cobra"
-	"github.com/tomsdevsn/berichtsheft-cli/pkg/database"
+	"github.com/tomsdevsn/berichtsheft-cli/internal/database"
 )
 
-var force bool
+var (
+	force        bool
+	databasePath string
+)
 
 // initCmd represents the init command
 var initCmd = &cobra.Command{
 	Use:   "init",
 	Short: "Initialize the database for the Berichtsheft",
 	Run: func(cmd *cobra.Command, args []string) {
-		database.InitDatabase("", force)
+		database.InitDatabase(&databasePath, force)
 	},
 }
 
 func init() {
-	RootCmd.AddCommand(initCmd)
+	defaultDatabasePath, _ := homedir.Expand("~/.berichtsheft/berichtsheft.db")
+	initCmd.Flags().StringVarP(&databasePath, "database.path", "", defaultDatabasePath, "Path to the database file")
 	initCmd.Flags().BoolVarP(&force, "force", "f", false, "Force the initialization of the database (will overwrite if it already exists)")
+	RootCmd.AddCommand(initCmd)
 }

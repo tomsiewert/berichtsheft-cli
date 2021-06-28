@@ -3,8 +3,7 @@ module github.com/tomsdevsn/berichtsheft-cli
 go 1.16
 
 require (
-	github.com/go-kit/kit v0.10.0
-	github.com/kr/logfmt v0.0.0-20210122060352-19f9bcb100e6 // indirect
+	github.com/golang-migrate/migrate/v4 v4.14.1
 	github.com/mitchellh/go-homedir v1.1.0
 	github.com/spf13/cobra v1.1.3
 	github.com/spf13/viper v1.8.1

@@ -9,9 +9,7 @@ import (
 )
 
 var (
-	cfgFile      string
-	BuildDate    string
-	BuildVersion string
+	cfgFile string
 
 	RootCmd = &cobra.Command{
 		Use:   "berichtsheft",

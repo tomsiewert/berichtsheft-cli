@@ -2,7 +2,7 @@ version: '3'
 output: 'prefixed'
 
 env:
-  CGO_ENABLED: 0
+  CGO_CFLAGS: -g -O2 -Wno-return-local-addr
 
 vars:
   PATH: 'github.com/tomsdevsn/berichtsheft-cli'
@@ -16,7 +16,7 @@ tasks:
   bin:
     desc: Build the binary file
     cmds:
-      - go build -a -ldflags "-X {{.PATH}}/cmd/berichtsheft.BuildDate={{.DATE}} -X {{.PATH}}/cmd/berichtsheft.BuildVersion={{.VERSION}} -extldflags '-static' -s -w" -o build/{{.BINARY_NAME}}
+      - go build -a -ldflags "-X {{.PATH}}/version.BuildDate={{.DATE}} -X {{.PATH}}/version.BuildVersion={{.VERSION}} -extldflags '-static' -s -w" -o build/{{.BINARY_NAME}}
   bin-cov:
     cmds:
       - mkdir -p build

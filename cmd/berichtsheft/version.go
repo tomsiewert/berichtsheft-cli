@@ -19,6 +19,7 @@ import (
 	"fmt"
 
 	"github.com/spf13/cobra"
+	"github.com/tomsdevsn/berichtsheft-cli/version"
 )
 
 // versionCmd represents the version command
@@ -26,8 +27,8 @@ var versionCmd = &cobra.Command{
 	Use:   "version",
 	Short: "Show the build information",
 	RunE: func(cmd *cobra.Command, args []string) error {
-		fmt.Println("Build Version: " + BuildVersion)
-		fmt.Println("Build Date: " + BuildDate)
+		fmt.Println("Build Version: " + version.BuildVersion)
+		fmt.Println("Build Date: " + version.BuildDate)
 		return nil
 	},
 }
